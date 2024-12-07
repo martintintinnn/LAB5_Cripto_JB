@@ -1,0 +1,42 @@
+version: '3.9'
+services:
+  c1:
+    build:
+      context: ./C1
+    container_name: C1
+    networks:
+      lab5_net:
+        ipv4_address: 172.19.0.11
+
+  c2:
+    build:
+      context: ./C2
+    container_name: C2
+    networks:
+      lab5_net:
+        ipv4_address: 172.19.0.22
+
+  c3:
+    build:
+      context: ./C3
+    container_name: C3
+    networks:
+      lab5_net:
+        ipv4_address: 172.19.0.33
+
+  c4:
+    build:
+      context: ./C4
+    container_name: C4
+    networks:
+      lab5_net:
+        ipv4_address: 172.19.0.44
+    ports:
+      - "22:22" # Mapeo del puerto SSH
+
+networks:
+  lab5_net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.19.0.0/16

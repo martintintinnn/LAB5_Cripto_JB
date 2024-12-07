@@ -1,0 +1,117 @@
+docker stop $(docker ps -aq) && docker rm $(docker ps -aq) && docker rmi -f $(docker images -aq) && docker volume rm $(docker volume ls -q) && docker network rm $(docker network ls -q)
+
+
+
+
+docker stop $(docker ps -q)
+docker rm $(docker ps -aq)
+docker rmi $(docker images -q)
+
+
+
+sudo netstat -tuln | grep :22
+
+-- Por problemas DE PUERTO 22(CONEXIONES REMOTAS, DETENEMOS ESTE PUERTO)
+sudo systemctl stop ssh
+
+-- Para que este desactivado automaticamente
+sudo systemctl disable ssh
+sudo systemctl enable ssh
+
+-- Para habilitar
+sudo systemctl start ssh
+
+
+
+
+
+
+-- En el directorio
+docker-compose up --build
+
+
+docker ps
+
+docker exec -it C1 bash
+ssh prueba@C4
+
+
+docker exec -it C4 bash
+service ssh status
+
+-- INICIAMOS EL SSH DEL C4
+service ssh start
+service ssh status
+
+-- Inspeccionamos el shh de C4 desde su terminal
+cat /etc/ssh/sshd_config
+
+PermitRootLogin yes
+PasswordAuthentication yes
+
+-- Editamos ese archivo agregando lo de arriba si es que falta
+nano /etc/ssh/sshd_config
+
+-- Una vez hecho los cambios reiniciamos
+service ssh restart
+
+-- En el c4 creamos usuario
+useradd -m prueba
+echo "prueba:prueba" | chpasswd
+
+-- revisamos
+cat /etc/passwd | grep prueba
+
+
+
+docker-compose up --build
+
+sudo wireshark
+
+ifconfig
+
+docker network inspect lab5_cripto_lab5_net
+
+
+¡Perfecto! La red lab5_cripto_lab5_net está correctamente configurada y los contenedores están conectados a ella. Aquí tienes los detalles clave:
+
+Subred: 172.19.0.0/16
+Contenedores y direcciones IP:
+C1: 172.19.0.4
+C2: 172.19.0.3
+C3: 172.19.0.2
+C4 (servidor S1): 172.19.0.5
+
+
+
+-- interfaz de wireshark docker0
+
+docker exec -it C1 bash
+ssh prueba@172.19.0.44
+
+docker exec -it C2 bash
+ssh prueba@172.19.0.44
+
+docker exec -it C3 bash
+ssh prueba@172.19.0.44
+
+
+
+docker exec -it C4 bash
+tcpdump -i lo -w /c4.pcap
+
+docker exec -it C4 bash
+ssh prueba@172.19.0.44
+
+docker cp C4:/c4.pcap /home/jb/Desktop/lab5_cripto/c4.pcap
+
+
+
+sudo apt install git gcc g++ make cmake libssl-dev
+
+
+ls
+
+cat /etc/hostname
+
+echo "Hola desde C1"
